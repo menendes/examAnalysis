@@ -27,7 +27,7 @@ public class ExamRestController {
     }
 
     @GetMapping("/getDetails/{id}")
-    public Exam getDetails(@PathVariable int id){
+    public Map<String, Object> getDetails(@PathVariable int id){
         return examService.getExamDetail(id);
     }
 

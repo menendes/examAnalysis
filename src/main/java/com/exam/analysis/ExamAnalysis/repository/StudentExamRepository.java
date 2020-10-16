@@ -15,4 +15,5 @@ public interface StudentExamRepository extends JpaRepository<StudentExam,Integer
    // List<Exam> findStudentExamByStudent_StudentNumber();
 
     List<StudentExam> findStudentExamByStudent_StudentNumber(int id);
+    List<StudentExam> findStudentExamByExam_ExamCode(int id);
 }
