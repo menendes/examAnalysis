@@ -79,10 +79,6 @@ public class StudentService implements StudentImpl {
             sumOfGrades += iterator.next().getGrade();
         }
 
-        /*
-        for(int i = 0; i<numberOfExams;i++){
-            sumOfGrades += studentExamList.get(i).getGrade();
-        }*/
         return sumOfGrades/numberOfExams;
     }
 }

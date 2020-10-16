@@ -1,5 +1,6 @@
 package com.exam.analysis.ExamAnalysis.controller;
 
+import com.exam.analysis.ExamAnalysis.dto.ExamListDTO;
 import com.exam.analysis.ExamAnalysis.enums.CustomError;
 import com.exam.analysis.ExamAnalysis.model.Exam;
 import com.exam.analysis.ExamAnalysis.service.ExamService;
@@ -32,7 +33,7 @@ public class ExamRestController {
     }
 
     @GetMapping("/getAllExams")
-    public List<Exam> getAllExams(){
+    public List<ExamListDTO> getAllExams(){
         return examService.getExamList();
     }
 
