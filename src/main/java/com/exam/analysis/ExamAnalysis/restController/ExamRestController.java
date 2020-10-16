@@ -1,4 +1,4 @@
-package com.exam.analysis.ExamAnalysis.controller;
+package com.exam.analysis.ExamAnalysis.restController;
 
 import com.exam.analysis.ExamAnalysis.dto.ExamListDTO;
 import com.exam.analysis.ExamAnalysis.enums.CustomError;

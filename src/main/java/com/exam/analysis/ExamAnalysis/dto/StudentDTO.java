@@ -9,6 +9,16 @@ public class StudentDTO {
     private int studentNumber;
     private String name;
     private String surname;
-    private String classroom;
+   // private String classroom;
     private double avgGrade;
+
+    @Override
+    public String toString() {
+        return "StudentDTO{" +
+                "studentNumber=" + studentNumber +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", avgGrade=" + avgGrade +
+                '}';
+    }
 }

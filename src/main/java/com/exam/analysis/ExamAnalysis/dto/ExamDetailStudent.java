@@ -15,9 +15,10 @@ public class ExamDetailStudent extends StudentDTO{
         return super.getAvgGrade();
     }
 
+    /*
     @JsonIgnore
     @Override
     public String getClassroom() {
         return super.getClassroom();
-    }
+    }*/
 }
