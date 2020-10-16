@@ -28,14 +28,18 @@ public class ExamRestController {
 
     @GetMapping("/getDetails/{id}")
     public Exam getDetails(@PathVariable int id){
-        return examService.getExamlDetail(id);
+        return examService.getExamDetail(id);
     }
 
     @GetMapping("/getAllExams")
     public List<Exam> getAllExams(){
-        // Pageable limit = PageRequest.of(1,2);
         return examService.getExamList();
     }
+
+
+
+
+
 
     // Custom Error Valid
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)

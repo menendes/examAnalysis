@@ -7,6 +7,6 @@ import java.util.List;
 public interface ExamImpl {
 
     public abstract List<Exam> getExamList();
-    public abstract Exam getExamlDetail(int examCode);
+    public abstract Exam getExamDetail(int examCode);
     public abstract Exam addExam(Exam exam);
 }

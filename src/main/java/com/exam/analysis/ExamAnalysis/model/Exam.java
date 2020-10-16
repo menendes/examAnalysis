@@ -37,11 +37,9 @@ public class Exam {
     @Range(min = 30, max = 240, message = "Exam time can be minimum 30 minute , maximum 240 minute.")
     private int examMinute;
 
-    /*
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "exam")
-    private List<StudentExam> studentExams;
 
-*/
-
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "examCode")
+    private List<ExamClassroom> examClassrooms;
 
 }

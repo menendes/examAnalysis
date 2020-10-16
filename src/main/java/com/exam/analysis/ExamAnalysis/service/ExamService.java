@@ -21,12 +21,12 @@ public class ExamService implements ExamImpl {
     }
 
     @Override
-    public Exam getExamlDetail(int examCode) {
+    public Exam getExamDetail(int examCode) {
         return examRepository.findById(examCode);
     }
 
     @Override
     public Exam addExam(Exam exam) {
-        return examRepository.saveAndFlush(exam);
+        return  examRepository.save(exam);
     }
 }
