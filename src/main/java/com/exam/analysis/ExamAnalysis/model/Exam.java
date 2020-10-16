@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity(name = "exam")
 @Data
@@ -33,11 +34,14 @@ public class Exam {
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
     private LocalDateTime examDate;
 
-
-
     @Range(min = 30, max = 240, message = "Exam time can be minimum 30 minute , maximum 240 minute.")
     private int examMinute;
 
+    /*
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "exam")
+    private List<StudentExam> studentExams;
+
+*/
 
 
 }

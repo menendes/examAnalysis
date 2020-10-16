@@ -1,5 +1,6 @@
 package com.exam.analysis.ExamAnalysis.controller;
 
+import com.exam.analysis.ExamAnalysis.dto.StudentDTO;
 import com.exam.analysis.ExamAnalysis.enums.CustomError;
 import com.exam.analysis.ExamAnalysis.model.Student;
 import com.exam.analysis.ExamAnalysis.model.StudentExam;
@@ -34,19 +35,17 @@ public class StudentRestController {
     }
 
     @GetMapping("/getDetails/{id}")
-    public Student getDetails(@PathVariable int id){
+    public Map<String,Object> getDetails(@PathVariable int id){
         return studentService.getStudentDetails(id);
     }
 
-    @GetMapping("/getAllStudents")
-    public List<Student> getAllStudents(){
-       // Pageable limit = PageRequest.of(1,2);
-        return studentService.getAllStudents();
+    @GetMapping("/getAllStudents/{numberOfStudents}")
+    public List<StudentDTO> getAllStudents(@PathVariable int numberOfStudents){
+        return studentService.getAllStudents(numberOfStudents);
     }
 
     @PostMapping("/assignExam")
     public StudentExam assignExam(@Valid @RequestBody StudentExam studentExam){
-        System.out.println("gradeeeeeee"+studentExam.getGrade());
         return studentExamService.assignExam(studentExam);
     }
 
