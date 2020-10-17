@@ -1,12 +1,11 @@
 package com.exam.analysis.ExamAnalysis.view;
 
 import com.exam.analysis.ExamAnalysis.UIController.StudentUIController;
-import com.exam.analysis.ExamAnalysis.service.StudentExamService;
-import com.exam.analysis.ExamAnalysis.service.StudentService;
 import com.exam.analysis.ExamAnalysis.util.BeanProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class StudentPage{
 
@@ -32,12 +31,12 @@ public class StudentPage{
 
       void  placeComponents(JPanel panel, JFrame frame) {
 
-        //students button
+        //student page button
         JButton studentButton = new JButton("Öğrenciler");
         studentButton.setBounds(20, 10, 100, 40);
         studentButton.setEnabled(false);
 
-        //exam button
+        //exam page button
         JButton examButton = new JButton("Sınavlar");
         examButton.setBounds(130, 10, 100, 40);
         examButton.addActionListener(e -> {
@@ -45,7 +44,7 @@ public class StudentPage{
             ExamPage exam = new ExamPage();
         });
 
-        //analysis button
+        //analysis page button
         JButton studentsExam = new JButton("Analiz");
         studentsExam.setBounds(240, 10, 100, 40);
         studentsExam.addActionListener(e -> {

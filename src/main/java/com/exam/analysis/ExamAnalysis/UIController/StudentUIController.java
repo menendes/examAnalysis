@@ -22,12 +22,11 @@ public class StudentUIController {
     @Autowired
     StudentExamService studentExamService;
 
-    @Bean(name ="getStudents" )
     public Object[][] getStudents(){
         List<StudentDTO> students = studentService.getAllStudents(10);
         Object [][] rows = new Object[students.size()][4];
         int length = rows.length;
-        for(int i = 0; i<length;i++){
+        for(int i = 0; i < length;i++){
             rows[i][0] = students.get(i).getName();
             rows[i][1] = students.get(i).getSurname();
             rows[i][2] = students.get(i).getStudentNumber();
