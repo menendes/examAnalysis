@@ -1,7 +1,10 @@
 package com.exam.analysis.ExamAnalysis.UIController;
 
+import com.exam.analysis.ExamAnalysis.dto.ExamDTO;
 import com.exam.analysis.ExamAnalysis.dto.StudentDTO;
 import com.exam.analysis.ExamAnalysis.model.Student;
+import com.exam.analysis.ExamAnalysis.model.StudentExam;
+import com.exam.analysis.ExamAnalysis.service.StudentExamService;
 import com.exam.analysis.ExamAnalysis.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,12 +19,15 @@ public class StudentUIController {
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    StudentExamService studentExamService;
+
     @Bean(name ="getStudents" )
     public Object[][] getStudents(){
-        List<StudentDTO> students = studentService.getAllStudents(5);
+        List<StudentDTO> students = studentService.getAllStudents(10);
         Object [][] rows = new Object[students.size()][4];
-
-        for(int i = 0; i<rows.length;i++){
+        int length = rows.length;
+        for(int i = 0; i<length;i++){
             rows[i][0] = students.get(i).getName();
             rows[i][1] = students.get(i).getSurname();
             rows[i][2] = students.get(i).getStudentNumber();
@@ -55,5 +61,31 @@ public class StudentUIController {
         rows[7][1] = fetchStudent.getRegistrationDate();
 
         return rows;
+    }
+
+    public Object[][] getStudentExamDetail(int studentId){
+
+        Map<String,Object> studentDetailMap = studentService.getStudentDetails(studentId);
+        List<ExamDTO> exams = (List<ExamDTO>)studentDetailMap.get("exams");
+        Object [][] rows = new Object[exams.size()][6];
+        int lentgh = rows.length;
+        for(int i = 0; i<lentgh; i++){
+            rows[i][0] = exams.get(i).getExamCode();
+            rows[i][1] = exams.get(i).getLesson();
+            rows[i][2] = exams.get(i).getExamPlace();
+            rows[i][3] = exams.get(i).getExamDate();
+            rows[i][4] = exams.get(i).getExamMinute();
+            rows[i][5] = exams.get(i).getGrade();
+        }
+
+        return rows;
+    }
+
+    public Student addStudent(Student student){
+        return studentService.createStudent(student);
+    }
+
+    public StudentExam assignExamToStudent(StudentExam assignedExam){
+        return studentExamService.assignExam(assignedExam);
     }
 }
