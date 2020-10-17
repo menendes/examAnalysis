@@ -2,7 +2,10 @@ package com.exam.analysis.ExamAnalysis.view;
 
 import com.exam.analysis.ExamAnalysis.UIController.StudentUIController;
 import com.exam.analysis.ExamAnalysis.enums.Gender;
+import com.exam.analysis.ExamAnalysis.model.Exam;
 import com.exam.analysis.ExamAnalysis.model.Student;
+import com.exam.analysis.ExamAnalysis.model.StudentExam;
+import com.exam.analysis.ExamAnalysis.service.StudentExamService;
 import com.exam.analysis.ExamAnalysis.service.StudentService;
 import com.exam.analysis.ExamAnalysis.util.BeanProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class StudentPage{
@@ -24,6 +28,9 @@ public class StudentPage{
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    StudentExamService studentExamService;
+
     static Object[][] studentListString;
 
     public StudentPage() {
@@ -32,7 +39,7 @@ public class StudentPage{
 
         JFrame studentFrame = new JFrame("Exam Analysis");
 
-        studentFrame.setSize(600, 600);
+        studentFrame.setSize(1200, 800);
         studentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
@@ -40,7 +47,7 @@ public class StudentPage{
 
         panel.setLayout(null);
 
-        studentListString = studentUIController.getStudents();
+        setData();
 
         placeComponents(panel, studentFrame);
 
@@ -49,14 +56,18 @@ public class StudentPage{
 
     }
 
+      void setData(){
+          studentListString = studentUIController.getStudents();
+      }
+
       void  placeComponents(JPanel panel, JFrame frame) {
 
         JButton studentButton = new JButton("Öğrenciler");
-        studentButton.setBounds(0, 0, 100, 40);
+        studentButton.setBounds(20, 10, 100, 40);
         studentButton.setEnabled(false);
 
         JButton examButton = new JButton("Sınavlar");
-        examButton.setBounds(100, 0, 100, 40);
+        examButton.setBounds(130, 10, 100, 40);
         examButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,7 +77,7 @@ public class StudentPage{
         });
 
         JButton studentsExam = new JButton("Analiz");
-        studentsExam.setBounds(200, 0, 100, 40);
+        studentsExam.setBounds(240, 10, 100, 40);
         studentsExam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,12 +88,12 @@ public class StudentPage{
 
 
 
-        String[] column = {"Ad", "Soyad", "Öğrenci No", "Ortalama"};
-        JTable studentTable = new JTable(studentListString, column);
-        studentTable.setBounds(30, 60, 500, 300);
+        String[] tableColumn = {"Ad", "Soyad", "Öğrenci No", "Ortalama"};
+        JTable studentTable = new JTable(studentListString, tableColumn);
+        studentTable.setBounds(30, 60, 1100, 500);
 
         JButton addStudentButton = new JButton("Öğrenci Ekle");
-        addStudentButton.setBounds(10, 400, 200, 40);
+        addStudentButton.setBounds(10, 580, 200, 40);
         addStudentButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -115,7 +126,8 @@ public class StudentPage{
                 studentClass = new JTextField("Sınıf");
                 studentClass.setBounds(50, 210, 500, 30);
 
-                bornDate = new JTextField("Kayıt Tarihi");
+                DateTimeFormatter df = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                bornDate = new JTextField("Doğum Tarihi");
                 bornDate.setBounds(50, 260, 500, 30);
 
                 registerButton.setBounds(250, 320, 100, 30);
@@ -126,7 +138,7 @@ public class StudentPage{
                         newStudent.setName(studentName.getText());
                         newStudent.setSurname(studentSurname.getText());
                         newStudent.setAddress(address.getText());
-                        //newStudent.setBornDate(LocalDate.parse(bornDate.getText()));
+                        newStudent.setBornDate(LocalDate.parse(bornDate.getText().trim(),df));
                         newStudent.setRegistrationDate(LocalDate.now());
                         newStudent.setClassroom(studentClass.getText());
                         if(male.isSelected()){
@@ -135,8 +147,10 @@ public class StudentPage{
                             newStudent.setGender(Gender.female);
                         }
                         studentService.createStudent(newStudent);
-
+                        setData();
+                        frame.repaint();
                         formFrame.setVisible(false);
+
                     }
                 });
 
@@ -153,8 +167,35 @@ public class StudentPage{
             }
         });
 
+
+        JButton studentDetailButton = new JButton("Öğrenci Detayı");
+        studentDetailButton.setBounds(220, 580, 150, 40);
+        studentDetailButton.addActionListener(e -> {
+            JFrame sDetailFrame = new JFrame();
+            sDetailFrame.setSize(1200, 800);
+            sDetailFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+
+            int columnIndex = 2;
+            int rowIndex = studentTable.getSelectedRow();
+            String selectedStudentId = studentTable.getModel().getValueAt(rowIndex, columnIndex).toString();
+
+
+
+            String[] studentDetailTableColumn = {"Key", "Value"};
+            Object[][] studentDetailTableRow = studentUIController.getStudentDetail(Integer.parseInt(selectedStudentId));
+            JTable studentDetailTable = new JTable(studentDetailTableRow,studentDetailTableColumn);
+            studentDetailTable.setBounds(750,300,300,150);
+
+            sDetailFrame.add(studentDetailTable);
+            sDetailFrame.setLayout(null);
+             sDetailFrame.setVisible(true);
+
+
+        });
+
+
         JButton addStudentExam = new JButton("Öğrenci Sınav Ekleme");
-        addStudentExam.setBounds(350, 400, 200, 40);
+        addStudentExam.setBounds(380, 580, 200, 40);
         addStudentExam.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -179,9 +220,23 @@ public class StudentPage{
                 registerButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+
+                        StudentExam studentExam = new StudentExam();
+                        Student student = new Student();
+                        Exam exam = new Exam();
+                        student.setStudentNumber(Integer.parseInt(studentID.getText()));
+                        exam.setExamCode(Integer.parseInt(examCode.getText()));
+                        studentExam.setExam(exam);
+                        studentExam.setStudent(student);
+                        studentExam.setGrade(Double.parseDouble(grade.getText()));
+                        studentExamService.assignExam(studentExam);
+                        studentListString = studentUIController.getStudents();
+                        setData();
+                        frame.repaint();
                         sExamFormFrame.setVisible(false);
                     }
                 });
+
 
                 fileChooser.setBounds(300, 400, 200, 30);
                 fileChooser.addActionListener(new ActionListener() {
@@ -227,6 +282,7 @@ public class StudentPage{
         panel.add(examButton);
         panel.add(studentsExam);
         panel.add(studentTable);
+        panel.add(studentDetailButton);
         panel.add(addStudentButton);
         panel.add(addStudentExam);
     }
