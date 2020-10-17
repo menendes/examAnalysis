@@ -19,7 +19,7 @@ public class AddExamPage {
     @Autowired
     ExamUIController examUIController;
 
-    AddExamPage(){
+    public AddExamPage(){
         BeanProvider.autowire(this);
         init();
     }

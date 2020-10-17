@@ -15,7 +15,7 @@ public class AddStudentPage {
     @Autowired
     StudentUIController studentUIController;
 
-    AddStudentPage(){
+    public AddStudentPage(){
         BeanProvider.autowire(this);
         init();
     }

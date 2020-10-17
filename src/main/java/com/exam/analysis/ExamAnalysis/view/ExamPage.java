@@ -58,10 +58,20 @@ public class ExamPage {
                 AddExamPage addExamPage = new AddExamPage();
         });
 
+         JButton examDetailButton = new JButton("Sınav Detayı");
+         examDetailButton.setBounds(220, 580, 150, 40);
+         examDetailButton.addActionListener(e -> {
+             int columnIndex = 0;
+             int rowIndex = examTable.getSelectedRow();
+             String selectedExamCode = examTable.getModel().getValueAt(rowIndex, columnIndex).toString();
+             ExamDetailPage examDetailPage = new ExamDetailPage(Integer.parseInt(selectedExamCode));
+         });
+
         panel.add(studentButton);
         panel.add(examButton);
         panel.add(studentsExam);
         panel.add(examTable);
         panel.add(addExamButton);
+        panel.add(examDetailButton);
     }
 }

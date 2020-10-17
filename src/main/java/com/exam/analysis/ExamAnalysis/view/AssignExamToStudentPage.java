@@ -16,7 +16,7 @@ public class AssignExamToStudentPage {
     @Autowired
     StudentUIController studentUIController;
 
-    AssignExamToStudentPage(){
+    public AssignExamToStudentPage(){
         BeanProvider.autowire(this);
         init();
     }
