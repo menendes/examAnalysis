@@ -87,4 +87,5 @@ public class StudentUIController {
     public StudentExam assignExamToStudent(StudentExam assignedExam){
         return studentExamService.assignExam(assignedExam);
     }
+
 }

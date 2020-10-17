@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AssignExamToStudentPage {
 
@@ -56,6 +58,7 @@ public class AssignExamToStudentPage {
         //read file and insert data to database
         fileChooser.setBounds(300, 400, 200, 30);
         fileChooser.addActionListener(e -> {
+            List<StudentExam> studentGrades = new ArrayList<>();
             final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
             int returnVal = fc.showOpenDialog(null);
             if (returnVal == JFileChooser.APPROVE_OPTION){
@@ -65,13 +68,32 @@ public class AssignExamToStudentPage {
                     in = new BufferedReader(new FileReader(selectedFile));
                     String line = in.readLine();
                     while (line != null){
-                        studentID.setText(line);
-                        line = in.readLine();
-                        examCode.setText(line);
-                        line = in.readLine();
-                        grade.setText(line);
+
+                        //create studentExam payload
+                        StudentExam studentExam = new StudentExam();
+                        Student student = new Student();
+                        Exam exam = new Exam();
+
+                        //split the string
+                        String[] getData = line.split(" ");
+
+                        //set the data
+                        student.setStudentNumber(Integer.parseInt(getData[0]));
+                        exam.setExamCode(Integer.parseInt(getData[1]));
+                        studentExam.setStudent(student);
+                        studentExam.setExam(exam);
+                        studentExam.setGrade(Double.parseDouble(getData[2]));
+
+                        //add the list
+                        studentGrades.add(studentExam);
+
+                        //pass the next line
                         line = in.readLine();
                     }
+                    studentGrades.forEach(item ->{
+                        studentUIController.assignExamToStudent(item);
+                    });
+                    sExamFormFrame.setVisible(false);
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
                 } catch (IOException e1) {
