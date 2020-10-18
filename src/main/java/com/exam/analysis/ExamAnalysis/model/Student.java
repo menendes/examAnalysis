@@ -1,6 +1,5 @@
 package com.exam.analysis.ExamAnalysis.model;
 
-
 import com.exam.analysis.ExamAnalysis.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -12,7 +11,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
-
 
 @Entity(name = "student")
 @Data
@@ -52,12 +50,4 @@ public class Student implements Serializable {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate registrationDate;
 
-
-/*
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
-    private List<StudentExam> exams;
-*/
-/*
-    @OneToMany(targetEntity = Exam.class,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private List<Exam> exams;*/
 }

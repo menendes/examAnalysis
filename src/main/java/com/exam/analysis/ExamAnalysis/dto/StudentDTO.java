@@ -9,7 +9,6 @@ public class StudentDTO {
     private int studentNumber;
     private String name;
     private String surname;
-   // private String classroom;
     private double avgGrade;
 
     @Override

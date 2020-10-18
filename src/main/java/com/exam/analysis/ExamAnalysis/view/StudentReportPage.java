@@ -31,8 +31,8 @@ public class StudentReportPage {
     private void init() {
         JFrame studentReportFrame = new JFrame("Rapor Oluşturma");
 
-        studentReportFrame.setSize(1200, 800);
-        studentReportFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        studentReportFrame.setSize(1200, 750);
+        studentReportFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         JTextArea jTextArea = new JTextArea();
 

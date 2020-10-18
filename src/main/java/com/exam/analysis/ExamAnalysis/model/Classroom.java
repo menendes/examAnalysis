@@ -13,11 +13,9 @@ import java.util.List;
 @Data
 public class Classroom {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int classroomId;
-
 
     @NotNull(message = "Classrom Name Can Not Be Null")
     @NotEmpty(message = "Classroom Name Can Not Be Empty")
@@ -30,11 +28,5 @@ public class Classroom {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name="classroomId")
     private List<ExamClassroom> examClassrooms;
-
-/*
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinTable(name="ExamClassroom", joinColumns = @JoinColumn(name = "classromId",referencedColumnName = "classroomId"),inverseJoinColumns = @JoinColumn(name ="examCode",referencedColumnName = "examCode"))
-    private Exam exam;
-*/
 
 }
