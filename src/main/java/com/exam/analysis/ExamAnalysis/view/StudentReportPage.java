@@ -1,6 +1,7 @@
 package com.exam.analysis.ExamAnalysis.view;
 
 import com.exam.analysis.ExamAnalysis.UIController.StudentUIController;
+import com.exam.analysis.ExamAnalysis.model.Student;
 import com.exam.analysis.ExamAnalysis.util.BeanProvider;
 import com.exam.analysis.ExamAnalysis.util.ThreadProvider;
 import org.ini4j.*;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -24,37 +26,16 @@ public class StudentReportPage {
     public StudentReportPage(){
         BeanProvider.autowire(this);
         init();
-
     }
 
     private void init(){
-        JFrame studentReportFrame = new JFrame("Exam Analysis");
+        JFrame studentReportFrame = new JFrame("rapor Oluşturma");
 
         studentReportFrame.setSize(1200, 800);
         studentReportFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel panel = new JPanel();
-        studentReportFrame.add(panel);
 
-        //student page button
-        JButton studentButton = new JButton("Öğrenciler");
-        studentButton.setBounds(20, 10, 100, 40);
-        studentButton.addActionListener(e -> {
-            studentReportFrame.setVisible(false);
-            StudentPage studentPage = new StudentPage();
-        });
-
-        //exam page button
-        JButton examButton = new JButton("Sınavlar");
-        examButton.setBounds(130, 10, 100, 40);
-        examButton.addActionListener(e -> {
-            studentReportFrame.setVisible(false);
-            ExamPage examPage = new ExamPage();
-        });
-
-        JButton studentsExam = new JButton("Rapor Oluşturma");
-        studentsExam.setBounds(240, 10, 120, 40);
-        studentsExam.setEnabled(false);
+        JTextArea jTextArea = new JTextArea();
 
         JButton createReport = new JButton("Raporları Oluştur");
         createReport.setBounds(300, 500, 200, 30);
@@ -75,28 +56,40 @@ public class StudentReportPage {
             ThreadProvider provider_4 = new ThreadProvider();
             ThreadProvider provider_5 = new ThreadProvider();
 
+            Student student;
+
             for(int i = 0; i < length; i = i+5){
                 try{
 
                     provider_1.setData(students.get(i));
                     provider_1.setFileRootPath(filePath);
                     provider_1.start();
+                    student= (Student)students.get(i).get("studentInfo");
+                    jTextArea.append(student.getName()+" "+student.getSurname() +" isimli öğrenci raporu üretildi" +"\n");
 
                     provider_2.setData(students.get(i+1));
                     provider_2.setFileRootPath(filePath);
                     provider_2.start();
+                    student= (Student)students.get(i+1).get("studentInfo");
+                    jTextArea.append(student.getName()+" "+student.getSurname() +" isimli öğrenci raporu üretildi" +"\n");
 
                     provider_3.setData(students.get(i+2));
                     provider_3.setFileRootPath(filePath);
                     provider_3.start();
+                    student= (Student)students.get(i+2).get("studentInfo");
+                    jTextArea.append(student.getName()+" "+student.getSurname() +" isimli öğrenci raporu üretildi" +"\n");
 
                     provider_4.setData(students.get(i+3));
                     provider_4.setFileRootPath(filePath);
                     provider_4.start();
+                    student= (Student)students.get(i+3).get("studentInfo");
+                    jTextArea.append(student.getName()+" "+student.getSurname() +" isimli öğrenci raporu üretildi" +"\n");
 
                     provider_5.setData(students.get(i+4));
                     provider_5.setFileRootPath(filePath);
                     provider_5.start();
+                    student= (Student)students.get(i+4).get("studentInfo");
+                    jTextArea.append(student.getName()+" "+student.getSurname() +" isimli öğrenci raporu üretildi" +"\n");
 
                 }catch (IndexOutOfBoundsException ex){
                     break;
@@ -104,12 +97,14 @@ public class StudentReportPage {
             }
         });
 
-        panel.add(studentButton);
-        panel.add(examButton);
-        panel.add(studentsExam);
-        panel.add(createReport);
 
-        panel.setLayout(null);
+        JPanel jPanel = new JPanel();
+        jPanel.setLayout(new BorderLayout());
+        jPanel.add(jTextArea,BorderLayout.CENTER);
+
+        JScrollPane jScrollPane = new JScrollPane(jPanel);
+        studentReportFrame.add(createReport,BorderLayout.SOUTH);
+        studentReportFrame.add(jScrollPane,BorderLayout.CENTER);
         studentReportFrame.setVisible(true);
     }
 }
