@@ -3,13 +3,11 @@ package com.exam.analysis.ExamAnalysis.util;
 import com.exam.analysis.ExamAnalysis.dto.ExamDTO;
 import com.exam.analysis.ExamAnalysis.dto.ReportDTO;
 import com.exam.analysis.ExamAnalysis.model.Student;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.List;
+import java.io.*;
 import java.util.Map;
 
 public class ThreadProvider extends Thread {
@@ -22,19 +20,14 @@ public class ThreadProvider extends Thread {
     @Setter
     private String fileName;
 
-
     @Override
     public void run() {
-        try{
-            ReportDTO reportDTO = new ReportDTO();
-            reportDTO.setStudent((Student)data.get("studentInfo"));
-            reportDTO.setExamsListForRelatedUser((List<ExamDTO>)data.get("exams"));
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.writeValue(new File(fileName), data);
 
-            FileOutputStream fileOutputStream = new FileOutputStream(fileName);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(reportDTO);
-        } catch (IOException ex){
-            ex.printStackTrace();
+        } catch (IOException e){
+            e.printStackTrace();
         }
     }
 }

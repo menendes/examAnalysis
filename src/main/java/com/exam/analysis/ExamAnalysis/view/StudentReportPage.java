@@ -61,7 +61,7 @@ public class StudentReportPage {
             ThreadProvider provider_4 = new ThreadProvider();
             ThreadProvider provider_5 = new ThreadProvider();
 
-            for(int i = 0; i < length; i++){
+            for(int i = 0; i < length; i = i+5){
                 try{
                     provider_1.setData(students.get(i));
                     provider_1.setFileName(filePath.append(i).append(".txt").toString());
@@ -85,17 +85,8 @@ public class StudentReportPage {
 
                 }catch (IndexOutOfBoundsException ex){
                     break;
-
                 }
             }
-
-            /*
-            FileWriter fileWriter = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fileWriter);
-            bw.write(students.toString());
-            bw.flush();
-            bw.close();*/
-
         });
 
         panel.add(studentButton);
