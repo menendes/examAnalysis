@@ -22,3 +22,6 @@ spring.datasource.password={yourPassword}
 #### Database: PostgreSql
 #### UI: Swing
 #### ORM: Hibernate
+
+###Important Notes
+######If you do not have lombok plugins you have to install it. If you use IntelliJ, you can file >> plugins searc lombok from marketplace and install it.
