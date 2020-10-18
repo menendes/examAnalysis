@@ -23,19 +23,19 @@ spring.datasource.password={yourPassword}
 #### UI: Swing
 #### ORM: Hibernate
 
-###Important Notes
-######If you do not have lombok plugins you have to install it. If you use IntelliJ, you can file >> plugins searc lombok from marketplace and install it.
-######If you want to build project you can use the command : 
+### Important Notes
+##### If you do not have lombok plugins you have to install it. If you use IntelliJ, you can file >> plugins searc lombok from marketplace and install it.
+##### If you want to build project you can use the command : 
 ```sh
 $ mvn clean install -Djava.awt.headless=false
 ```
 
-###Build Docker Image
+### Build Docker Image
 ```sh
 $ docker build -t {your image name} .
 ```
 
-###Run Docker Image
+### Run Docker Image
 ```sh
 $ docker run -d --name yourContainerName -p 8080:8080 yourImageName
 ```
