@@ -9,6 +9,8 @@ import com.exam.analysis.ExamAnalysis.repository.StudentRepository;
 import com.exam.analysis.ExamAnalysis.serviceImpl.StudentImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
+@PropertySource("classpath:application.properties")
 public class StudentService implements StudentImpl {
 
     @Autowired
@@ -24,6 +27,9 @@ public class StudentService implements StudentImpl {
 
     @Autowired
     StudentExamRepository studentExamRepository;
+
+    @Value("${studentTablePerPageCount}")
+    int  numberOfStudentPerPage;
 
     @Override
     public Student createStudent(Student student) {
@@ -50,8 +56,10 @@ public class StudentService implements StudentImpl {
     }
 
     @Override
-    public List<StudentDTO> getAllStudents(int count) {
-        Pageable limit = PageRequest.of(0,count);
+    public List<StudentDTO> getAllStudents(int pageIndex) {
+
+        //page index will set for pagenation process num it is dummy
+        Pageable limit = PageRequest.of(0,numberOfStudentPerPage);
         ModelMapper modelMapper = new ModelMapper();
         List<StudentDTO> studentDTOS = new ArrayList<>();
 

@@ -4,24 +4,24 @@ import com.exam.analysis.ExamAnalysis.UIController.StudentUIController;
 import com.exam.analysis.ExamAnalysis.model.Student;
 import com.exam.analysis.ExamAnalysis.util.BeanProvider;
 import com.exam.analysis.ExamAnalysis.util.ThreadProvider;
-import org.ini4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@PropertySource("classpath:config.ini")
+
+@PropertySource("classpath:application.properties")
 public class StudentReportPage {
 
     @Autowired
     StudentUIController studentUIController;
 
-    private Wini ini;
+    @Value("${reportPath}")
+    private String filePath;
 
     public StudentReportPage() {
         BeanProvider.autowire(this);
@@ -29,25 +29,17 @@ public class StudentReportPage {
     }
 
     private void init() {
-        JFrame studentReportFrame = new JFrame("rapor Oluşturma");
+        JFrame studentReportFrame = new JFrame("Rapor Oluşturma");
 
         studentReportFrame.setSize(1200, 800);
         studentReportFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
         JTextArea jTextArea = new JTextArea();
 
         JButton createReport = new JButton("Raporları Oluştur");
         createReport.setBounds(300, 500, 200, 30);
         createReport.addActionListener(e -> {
-            try {
-                ini = new Wini(new File("C:\\Users\\halil.koyuncu\\Desktop\\ExamAnalysis\\ExamAnalysis\\src\\main\\resources\\config.ini"));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
 
-            String filePath = ini.get("Path", "reportPath");
-            ;
             List<Map<String, Object>> students = studentUIController.getStudentsForReports();
             int length = students.size();
 
@@ -97,7 +89,6 @@ public class StudentReportPage {
                 }
             }
         });
-
 
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BorderLayout());

@@ -2,7 +2,6 @@ package com.exam.analysis.ExamAnalysis;
 
 import com.exam.analysis.ExamAnalysis.view.HomePage;
 import lombok.var;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
@@ -24,8 +23,6 @@ public class ExamAnalysisApplication extends JFrame {
 		var ctx = new SpringApplicationBuilder(ExamAnalysisApplication.class)
 				.headless(false).run(args);
 
-
-		//SpringApplication.run(ExamAnalysisApplication.class, args);
 	}
 
 }

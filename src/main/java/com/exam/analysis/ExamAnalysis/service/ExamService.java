@@ -3,7 +3,6 @@ package com.exam.analysis.ExamAnalysis.service;
 import com.exam.analysis.ExamAnalysis.dto.ExamDetailStudent;
 import com.exam.analysis.ExamAnalysis.dto.ExamListDTO;
 import com.exam.analysis.ExamAnalysis.model.Exam;
-import com.exam.analysis.ExamAnalysis.model.Student;
 import com.exam.analysis.ExamAnalysis.model.StudentExam;
 import com.exam.analysis.ExamAnalysis.repository.ExamRepository;
 import com.exam.analysis.ExamAnalysis.repository.StudentExamRepository;
