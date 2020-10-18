@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface ExamImpl extends Calculate{
 
-    public abstract List<ExamListDTO> getExamList();
+    public abstract List<ExamListDTO> getExamList(int pageIndex);
     public abstract Map<String,Object> getExamDetail(int examCode);
     public abstract Exam addExam(Exam exam);
 }

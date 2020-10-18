@@ -23,7 +23,7 @@ public class ExamUIController {
 
     public Object[][] getExams(){
 
-        List<ExamListDTO> exams = examService.getExamList();
+        List<ExamListDTO> exams = examService.getExamList(0);
         Object[][] rows = new Object[exams.size()][7];
         int length = rows.length;
         for(int i = 0; i < length; i++){

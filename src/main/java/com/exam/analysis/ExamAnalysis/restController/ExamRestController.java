@@ -34,13 +34,8 @@ public class ExamRestController {
 
     @GetMapping("/getAllExams")
     public List<ExamListDTO> getAllExams(){
-        return examService.getExamList();
+        return examService.getExamList(0);
     }
-
-
-
-
-
 
     // Custom Error Valid
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)

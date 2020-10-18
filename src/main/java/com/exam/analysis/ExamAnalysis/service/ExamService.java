@@ -9,11 +9,16 @@ import com.exam.analysis.ExamAnalysis.repository.StudentExamRepository;
 import com.exam.analysis.ExamAnalysis.serviceImpl.ExamImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@PropertySource("classpath:application.properties")
 public class ExamService implements ExamImpl {
 
     @Autowired
@@ -22,13 +27,16 @@ public class ExamService implements ExamImpl {
     @Autowired
     StudentExamRepository studentExamRepository;
 
+    @Value("${examTablePerPageCount}")
+    int  numberOfExamPerPage;
 
     @Override
-    public List<ExamListDTO> getExamList() {
+    public List<ExamListDTO> getExamList(int pageIndex) {
 
         ModelMapper modelMapper = new ModelMapper();
 
         List<ExamListDTO> allExams = new ArrayList<>();
+        Pageable limit = PageRequest.of(0,numberOfExamPerPage);
         List<Exam> exams = examRepository.findAll();
 
         exams.forEach(exam -> {

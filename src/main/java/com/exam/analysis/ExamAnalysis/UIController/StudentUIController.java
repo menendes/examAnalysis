@@ -23,7 +23,7 @@ public class StudentUIController {
     StudentExamService studentExamService;
 
     public Object[][] getStudents(){
-        List<StudentDTO> students = studentService.getAllStudents(10);
+        List<StudentDTO> students = studentService.getAllStudents(0);
         Object [][] rows = new Object[students.size()][4];
         int length = rows.length;
         for(int i = 0; i < length;i++){
