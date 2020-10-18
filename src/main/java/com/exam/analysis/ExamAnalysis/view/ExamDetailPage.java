@@ -13,28 +13,28 @@ public class ExamDetailPage {
     @Autowired
     ExamUIController examUIController;
 
-    public ExamDetailPage(int examCode){
+    public ExamDetailPage(int examCode) {
         BeanProvider.autowire(this);
         this.selectedExamCode = examCode;
         init();
     }
 
-    private void init(){
+    private void init() {
         JFrame eDetailFrame = new JFrame();
         eDetailFrame.setSize(1200, 800);
         eDetailFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         //create student information table
-        String[] studentDetailTableColumn = {"Öğrenci Numarası", "Ad","Soyad","Not"};
+        String[] studentDetailTableColumn = {"Öğrenci Numarası", "Ad", "Soyad", "Not"};
         Object[][] studentDetailTableRow = examUIController.getStudentsRelatedExam(selectedExamCode);
-        JTable studentDetailTable = new JTable(studentDetailTableRow,studentDetailTableColumn);
-        studentDetailTable.setBounds(20,20,500,650);
+        JTable studentDetailTable = new JTable(studentDetailTableRow, studentDetailTableColumn);
+        studentDetailTable.setBounds(20, 20, 500, 650);
 
         //create exam information table
         String[] examDetailTableColumn = {"Key", "Value"};
         Object[][] examDetailTableRow = examUIController.getExamDetail(selectedExamCode);
-        JTable examDetailTable = new JTable(examDetailTableRow,examDetailTableColumn);
-        examDetailTable.setBounds(550,20,500,100);
+        JTable examDetailTable = new JTable(examDetailTableRow, examDetailTableColumn);
+        examDetailTable.setBounds(550, 20, 500, 100);
 
         eDetailFrame.add(studentDetailTable);
         eDetailFrame.add(examDetailTable);

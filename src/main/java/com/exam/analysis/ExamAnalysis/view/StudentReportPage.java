@@ -23,12 +23,12 @@ public class StudentReportPage {
 
     private Wini ini;
 
-    public StudentReportPage(){
+    public StudentReportPage() {
         BeanProvider.autowire(this);
         init();
     }
 
-    private void init(){
+    private void init() {
         JFrame studentReportFrame = new JFrame("rapor Oluşturma");
 
         studentReportFrame.setSize(1200, 800);
@@ -40,14 +40,15 @@ public class StudentReportPage {
         JButton createReport = new JButton("Raporları Oluştur");
         createReport.setBounds(300, 500, 200, 30);
         createReport.addActionListener(e -> {
-            try{
+            try {
                 ini = new Wini(new File("C:\\Users\\halil.koyuncu\\Desktop\\ExamAnalysis\\ExamAnalysis\\src\\main\\resources\\config.ini"));
-            }catch (IOException ex){
+            } catch (IOException ex) {
                 ex.printStackTrace();
             }
 
-            String filePath = ini.get("Path","reportPath");;
-            List<Map<String,Object>> students = studentUIController.getStudentsForReports();
+            String filePath = ini.get("Path", "reportPath");
+            ;
+            List<Map<String, Object>> students = studentUIController.getStudentsForReports();
             int length = students.size();
 
             ThreadProvider provider_1 = new ThreadProvider();
@@ -58,40 +59,40 @@ public class StudentReportPage {
 
             Student student;
 
-            for(int i = 0; i < length; i = i+5){
-                try{
+            for (int i = 0; i < length; i = i + 5) {
+                try {
 
                     provider_1.setData(students.get(i));
                     provider_1.setFileRootPath(filePath);
                     provider_1.start();
-                    student= (Student)students.get(i).get("studentInfo");
-                    jTextArea.append(student.getName()+" "+student.getSurname() +" isimli öğrenci raporu üretildi" +"\n");
+                    student = (Student) students.get(i).get("studentInfo");
+                    jTextArea.append(student.getName() + " " + student.getSurname() + " isimli öğrenci raporu üretildi" + "\n");
 
-                    provider_2.setData(students.get(i+1));
+                    provider_2.setData(students.get(i + 1));
                     provider_2.setFileRootPath(filePath);
                     provider_2.start();
-                    student= (Student)students.get(i+1).get("studentInfo");
-                    jTextArea.append(student.getName()+" "+student.getSurname() +" isimli öğrenci raporu üretildi" +"\n");
+                    student = (Student) students.get(i + 1).get("studentInfo");
+                    jTextArea.append(student.getName() + " " + student.getSurname() + " isimli öğrenci raporu üretildi" + "\n");
 
-                    provider_3.setData(students.get(i+2));
+                    provider_3.setData(students.get(i + 2));
                     provider_3.setFileRootPath(filePath);
                     provider_3.start();
-                    student= (Student)students.get(i+2).get("studentInfo");
-                    jTextArea.append(student.getName()+" "+student.getSurname() +" isimli öğrenci raporu üretildi" +"\n");
+                    student = (Student) students.get(i + 2).get("studentInfo");
+                    jTextArea.append(student.getName() + " " + student.getSurname() + " isimli öğrenci raporu üretildi" + "\n");
 
-                    provider_4.setData(students.get(i+3));
+                    provider_4.setData(students.get(i + 3));
                     provider_4.setFileRootPath(filePath);
                     provider_4.start();
-                    student= (Student)students.get(i+3).get("studentInfo");
-                    jTextArea.append(student.getName()+" "+student.getSurname() +" isimli öğrenci raporu üretildi" +"\n");
+                    student = (Student) students.get(i + 3).get("studentInfo");
+                    jTextArea.append(student.getName() + " " + student.getSurname() + " isimli öğrenci raporu üretildi" + "\n");
 
-                    provider_5.setData(students.get(i+4));
+                    provider_5.setData(students.get(i + 4));
                     provider_5.setFileRootPath(filePath);
                     provider_5.start();
-                    student= (Student)students.get(i+4).get("studentInfo");
-                    jTextArea.append(student.getName()+" "+student.getSurname() +" isimli öğrenci raporu üretildi" +"\n");
+                    student = (Student) students.get(i + 4).get("studentInfo");
+                    jTextArea.append(student.getName() + " " + student.getSurname() + " isimli öğrenci raporu üretildi" + "\n");
 
-                }catch (IndexOutOfBoundsException ex){
+                } catch (IndexOutOfBoundsException ex) {
                     break;
                 }
             }
@@ -100,11 +101,11 @@ public class StudentReportPage {
 
         JPanel jPanel = new JPanel();
         jPanel.setLayout(new BorderLayout());
-        jPanel.add(jTextArea,BorderLayout.CENTER);
+        jPanel.add(jTextArea, BorderLayout.CENTER);
 
         JScrollPane jScrollPane = new JScrollPane(jPanel);
-        studentReportFrame.add(createReport,BorderLayout.SOUTH);
-        studentReportFrame.add(jScrollPane,BorderLayout.CENTER);
+        studentReportFrame.add(createReport, BorderLayout.SOUTH);
+        studentReportFrame.add(jScrollPane, BorderLayout.CENTER);
         studentReportFrame.setVisible(true);
     }
 }

@@ -19,21 +19,21 @@ public class AddExamPage {
     @Autowired
     ExamUIController examUIController;
 
-    public AddExamPage(){
+    public AddExamPage() {
         BeanProvider.autowire(this);
         init();
     }
 
-    private void init(){
+    private void init() {
         JFrame formFrame = new JFrame();
         formFrame.setSize(600, 600);
         formFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-        String[] lessons = {"TURKISH","MATH","PHYSIC","BIOLOGY","CHEMISTRY","HISTORY"};
+        String[] lessons = {"TURKISH", "MATH", "PHYSIC", "BIOLOGY", "CHEMISTRY", "HISTORY"};
         JComboBox lessonsComboBox = new JComboBox(lessons);
         lessonsComboBox.setBounds(50, 10, 500, 30);
 
-        JTextField  examDate, examPlace, examTime;
+        JTextField examDate, examPlace, examTime;
 
         examPlace = new JTextField("Sınav Yeri");
         examPlace.setBounds(50, 60, 500, 30);
@@ -52,29 +52,35 @@ public class AddExamPage {
             choosedClassrooms.add(classroom.getClassroomName());
         });
         JComboBox classroomComboBox = new JComboBox(choosedClassrooms.toArray());
-        classroomComboBox.setBounds(50,210,500,30);
+        classroomComboBox.setBounds(50, 210, 500, 30);
 
         JButton registerButton = new JButton("Kayıt");
         registerButton.setBounds(250, 400, 100, 30);
         registerButton.addActionListener(e -> {
             Exam exam = new Exam();
             String selectedLesson = lessonsComboBox.getItemAt(lessonsComboBox.getSelectedIndex()).toString();
-            switch (selectedLesson){
-                case "TURKISH" :  exam.setLesson(Lesson.TURKISH);
+            switch (selectedLesson) {
+                case "TURKISH":
+                    exam.setLesson(Lesson.TURKISH);
                     break;
-                case "MATH": exam.setLesson(Lesson.MATH);
+                case "MATH":
+                    exam.setLesson(Lesson.MATH);
                     break;
-                case "PHYSIC": exam.setLesson(Lesson.PHYSIC);
+                case "PHYSIC":
+                    exam.setLesson(Lesson.PHYSIC);
                     break;
-                case "BIOLOGY": exam.setLesson(Lesson.BIOLOGY);
+                case "BIOLOGY":
+                    exam.setLesson(Lesson.BIOLOGY);
                     break;
-                case "CHEMISTRY": exam.setLesson(Lesson.CHEMISTRY);
+                case "CHEMISTRY":
+                    exam.setLesson(Lesson.CHEMISTRY);
                     break;
-                case "HISTORY": exam.setLesson(Lesson.HISTORY);
+                case "HISTORY":
+                    exam.setLesson(Lesson.HISTORY);
                     break;
             }
             exam.setExamPlace(examPlace.getText());
-            exam.setExamDate(LocalDateTime.parse(examDate.getText().trim(),df));
+            exam.setExamDate(LocalDateTime.parse(examDate.getText().trim(), df));
             exam.setExamMinute(Integer.parseInt(examTime.getText()));
 
             ExamClassroom classroom = new ExamClassroom();

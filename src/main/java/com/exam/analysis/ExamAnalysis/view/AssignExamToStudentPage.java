@@ -18,12 +18,12 @@ public class AssignExamToStudentPage {
     @Autowired
     StudentUIController studentUIController;
 
-    public AssignExamToStudentPage(){
+    public AssignExamToStudentPage() {
         BeanProvider.autowire(this);
         init();
     }
 
-    private void init(){
+    private void init() {
         JFrame sExamFormFrame = new JFrame();
         sExamFormFrame.setSize(600, 600);
         sExamFormFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -61,13 +61,13 @@ public class AssignExamToStudentPage {
             List<StudentExam> studentGrades = new ArrayList<>();
             final JFileChooser fc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
             int returnVal = fc.showOpenDialog(null);
-            if (returnVal == JFileChooser.APPROVE_OPTION){
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File selectedFile = fc.getSelectedFile();
                 try {
                     BufferedReader in;
                     in = new BufferedReader(new FileReader(selectedFile));
                     String line = in.readLine();
-                    while (line != null){
+                    while (line != null) {
 
                         //create studentExam payload
                         StudentExam studentExam = new StudentExam();
@@ -90,7 +90,7 @@ public class AssignExamToStudentPage {
                         //pass the next line
                         line = in.readLine();
                     }
-                    studentGrades.forEach(item ->{
+                    studentGrades.forEach(item -> {
                         studentUIController.assignExamToStudent(item);
                     });
                     sExamFormFrame.setVisible(false);

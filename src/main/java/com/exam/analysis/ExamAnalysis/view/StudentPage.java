@@ -6,28 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.swing.*;
 
-public class StudentPage{
+public class StudentPage {
 
     @Autowired
     StudentUIController studentUIController;
 
     public StudentPage() {
-
         BeanProvider.autowire(this);
+        init();
+    }
 
+    private void init() {
         JFrame studentFrame = new JFrame("Exam Analysis");
         studentFrame.setSize(1200, 800);
         studentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
         studentFrame.add(panel);
-
         panel.setLayout(null);
-        placeComponents(panel, studentFrame);
-        studentFrame.setVisible(true);
-    }
-
-      private void placeComponents(JPanel panel, JFrame frame) {
 
         //student page button
         JButton studentButton = new JButton("Öğrenciler");
@@ -38,15 +34,14 @@ public class StudentPage{
         JButton examButton = new JButton("Sınavlar");
         examButton.setBounds(130, 10, 100, 40);
         examButton.addActionListener(e -> {
-            frame.setVisible(false);
+            studentFrame.setVisible(false);
             ExamPage exam = new ExamPage();
         });
 
         //analysis page button
         JButton studentReports = new JButton("Rapor Oluştur");
-        studentReports.setBounds(240, 10, 100, 40);
+        studentReports.setBounds(240, 10, 125, 40);
         studentReports.addActionListener(e -> {
-            frame.setVisible(false);
             StudentReportPage studentReportPage = new StudentReportPage();
         });
 
@@ -59,7 +54,7 @@ public class StudentPage{
         JButton addStudentButton = new JButton("Öğrenci Ekle");
         addStudentButton.setBounds(10, 580, 200, 40);
         addStudentButton.addActionListener(e -> {
-                AddStudentPage addStudentPage = new AddStudentPage();
+            AddStudentPage addStudentPage = new AddStudentPage();
         });
 
         //trigger student detail screen
@@ -76,7 +71,7 @@ public class StudentPage{
         JButton addStudentExam = new JButton("Öğrenci Sınav Ekleme");
         addStudentExam.setBounds(380, 580, 200, 40);
         addStudentExam.addActionListener(e -> {
-                AssignExamToStudentPage assignExamToStudentPage = new AssignExamToStudentPage();
+            AssignExamToStudentPage assignExamToStudentPage = new AssignExamToStudentPage();
         });
 
         panel.add(studentButton);
@@ -86,5 +81,7 @@ public class StudentPage{
         panel.add(studentDetailButton);
         panel.add(addStudentButton);
         panel.add(addStudentExam);
+
+        studentFrame.setVisible(true);
     }
 }
