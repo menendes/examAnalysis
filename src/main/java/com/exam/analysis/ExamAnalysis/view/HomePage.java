@@ -35,11 +35,11 @@ public class HomePage{
             ExamPage exam = new ExamPage();
         });
 
-        JButton studentsExam = new JButton("Analiz");
-        studentsExam.setBounds(200, 0, 100, 40);
-        studentsExam.addActionListener(e -> {
+        JButton studentReports = new JButton("Rapor Oluştur");
+        studentReports.setBounds(200, 0, 100, 40);
+        studentReports.addActionListener(e -> {
             frame.setVisible(false);
-            ExamAnalysisPage analysis = new ExamAnalysisPage();
+            StudentReportPage studentReportPage = new StudentReportPage();
         });
 
         JLabel welcomeText = new JLabel("Hoşgeldiniz... Başlamak için bir butona tıklayın.");
@@ -47,7 +47,7 @@ public class HomePage{
 
         panel.add(studentButton);
         panel.add(examButton);
-        panel.add(studentsExam);
+        panel.add(studentReports);
         panel.add(welcomeText);
     }
 }

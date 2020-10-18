@@ -81,4 +81,9 @@ public class StudentService implements StudentImpl {
 
         return sumOfGrades/numberOfExams;
     }
+
+    @Override
+    public List<Student> getStudentsForReports() {
+        return studentRepository.findAll();
+    }
 }

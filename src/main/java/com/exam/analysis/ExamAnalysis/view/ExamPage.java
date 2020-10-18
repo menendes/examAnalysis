@@ -41,11 +41,11 @@ public class ExamPage {
         examButton.setEnabled(false);
 
         //analysis page button
-        JButton studentsExam = new JButton("Analiz");
-        studentsExam.setBounds(240, 10, 100, 40);
-        studentsExam.addActionListener(e -> {
+        JButton studentReports = new JButton("Rapor Oluştur");
+        studentReports.setBounds(240, 10, 100, 40);
+        studentReports.addActionListener(e -> {
             frame.setVisible(false);
-            ExamAnalysisPage analysis = new ExamAnalysisPage();
+            StudentReportPage studentReportPage = new StudentReportPage();
         });
 
         String[] examTableColumn = {"Sınav Kodu", "Sınav Adı", "Sınav Tarihi", "Sınav Yeri","Süre","Öğrenci Sayısı","Ortalama"};
@@ -69,7 +69,7 @@ public class ExamPage {
 
         panel.add(studentButton);
         panel.add(examButton);
-        panel.add(studentsExam);
+        panel.add(studentReports);
         panel.add(examTable);
         panel.add(addExamButton);
         panel.add(examDetailButton);

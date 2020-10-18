@@ -5,7 +5,6 @@ import com.exam.analysis.ExamAnalysis.util.BeanProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
 public class StudentPage{
 
@@ -28,8 +27,7 @@ public class StudentPage{
         studentFrame.setVisible(true);
     }
 
-
-      void  placeComponents(JPanel panel, JFrame frame) {
+      private void placeComponents(JPanel panel, JFrame frame) {
 
         //student page button
         JButton studentButton = new JButton("Öğrenciler");
@@ -45,11 +43,11 @@ public class StudentPage{
         });
 
         //analysis page button
-        JButton studentsExam = new JButton("Analiz");
-        studentsExam.setBounds(240, 10, 100, 40);
-        studentsExam.addActionListener(e -> {
+        JButton studentReports = new JButton("Rapor Oluştur");
+        studentReports.setBounds(240, 10, 100, 40);
+        studentReports.addActionListener(e -> {
             frame.setVisible(false);
-            ExamAnalysisPage analysis = new ExamAnalysisPage();
+            StudentReportPage studentReportPage = new StudentReportPage();
         });
 
         //create student table
@@ -83,7 +81,7 @@ public class StudentPage{
 
         panel.add(studentButton);
         panel.add(examButton);
-        panel.add(studentsExam);
+        panel.add(studentReports);
         panel.add(studentTable);
         panel.add(studentDetailButton);
         panel.add(addStudentButton);

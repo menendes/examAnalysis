@@ -7,9 +7,9 @@ import com.exam.analysis.ExamAnalysis.model.StudentExam;
 import com.exam.analysis.ExamAnalysis.service.StudentExamService;
 import com.exam.analysis.ExamAnalysis.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -88,4 +88,16 @@ public class StudentUIController {
         return studentExamService.assignExam(assignedExam);
     }
 
+    public List<Map<String,Object>> getStudentsForReports(){
+
+        List<Student> studentList = studentService.getStudentsForReports();
+        List<Map<String,Object>> studentReportPayload = new ArrayList<>();
+
+        studentList.forEach(student -> {
+            Map<String,Object> studentDetail =  studentService.getStudentDetails(student.getStudentNumber());
+            studentReportPayload.add(studentDetail);
+        });
+
+        return studentReportPayload;
+    }
 }

@@ -52,6 +52,8 @@ public class Student implements Serializable {
     @JsonFormat(pattern = "dd-MM-yyyy")
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate registrationDate;
+
+
 /*
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
     private List<StudentExam> exams;

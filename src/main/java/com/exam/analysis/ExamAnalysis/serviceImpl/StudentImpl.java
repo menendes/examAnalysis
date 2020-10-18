@@ -12,4 +12,5 @@ public interface StudentImpl extends Calculate{
     public abstract Student createStudent(Student student);
     public abstract Map<String,Object> getStudentDetails(int id);
     public abstract List<StudentDTO> getAllStudents(int number);
+    public abstract List<Student> getStudentsForReports();
 }
