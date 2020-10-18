@@ -5,6 +5,7 @@ import com.exam.analysis.ExamAnalysis.enums.CustomError;
 import com.exam.analysis.ExamAnalysis.model.Exam;
 import com.exam.analysis.ExamAnalysis.service.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -33,6 +34,7 @@ public class ExamRestController {
     }
 
     @GetMapping("/getAllExams")
+    @Cacheable("allStudents")
     public List<ExamListDTO> getAllExams(){
         return examService.getExamList(0);
     }

@@ -7,6 +7,7 @@ import com.exam.analysis.ExamAnalysis.model.StudentExam;
 import com.exam.analysis.ExamAnalysis.service.StudentExamService;
 import com.exam.analysis.ExamAnalysis.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -40,6 +41,7 @@ public class StudentRestController {
     }
 
     @GetMapping("/getAllStudents/{numberOfStudents}")
+    @Cacheable("allExams")
     public List<StudentDTO> getAllStudents(@PathVariable int numberOfStudents){
         return studentService.getAllStudents(numberOfStudents);
     }

@@ -4,10 +4,12 @@ import com.exam.analysis.ExamAnalysis.view.HomePage;
 import lombok.var;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cache.annotation.EnableCaching;
 
 import javax.swing.*;
 
 @SpringBootApplication
+@EnableCaching
 public class ExamAnalysisApplication extends JFrame {
 
 	ExamAnalysisApplication(){
