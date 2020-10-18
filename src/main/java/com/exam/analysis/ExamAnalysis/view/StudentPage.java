@@ -63,8 +63,14 @@ public class StudentPage {
         studentDetailButton.addActionListener(e -> {
             int columnIndex = 2;
             int rowIndex = studentTable.getSelectedRow();
-            String selectedStudentId = studentTable.getModel().getValueAt(rowIndex, columnIndex).toString();
-            StudentDetailPage studentDetailPage = new StudentDetailPage(Integer.parseInt(selectedStudentId));
+            if (rowIndex == -1) {
+                JFrame errorPopUp = new JFrame();
+                JOptionPane.showMessageDialog(errorPopUp, "Lütfen bir tablodan bir öğrenci seçiniz");
+                errorPopUp.setVisible(false);
+            } else {
+                String selectedStudentId = studentTable.getModel().getValueAt(rowIndex, columnIndex).toString();
+                StudentDetailPage studentDetailPage = new StudentDetailPage(Integer.parseInt(selectedStudentId));
+            }
         });
 
         //trigger assign exam to student screen

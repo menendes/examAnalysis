@@ -61,8 +61,14 @@ public class ExamPage {
         examDetailButton.addActionListener(e -> {
             int columnIndex = 0;
             int rowIndex = examTable.getSelectedRow();
-            String selectedExamCode = examTable.getModel().getValueAt(rowIndex, columnIndex).toString();
-            ExamDetailPage examDetailPage = new ExamDetailPage(Integer.parseInt(selectedExamCode));
+            if (rowIndex == -1) {
+                JFrame errorPopUp = new JFrame();
+                JOptionPane.showMessageDialog(errorPopUp, "Lütfen bir tablodan bir sınav seçiniz");
+                errorPopUp.setVisible(false);
+            } else {
+                String selectedExamCode = examTable.getModel().getValueAt(rowIndex, columnIndex).toString();
+                ExamDetailPage examDetailPage = new ExamDetailPage(Integer.parseInt(selectedExamCode));
+            }
         });
 
         panel.add(studentButton);

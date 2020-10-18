@@ -42,18 +42,30 @@ public class HomePage {
         welcomeText.setBounds(20, 200, 300, 40);
 
         String studentText = "Öğrenciler butonunda öğrencilere ait bilgiler listelenir." +
-                "'Öğrenci Ekle' dieyerek yeni bir öğrenci ekleyebilirsiniz." +
+                "'Öğrenci Ekle' diyerek yeni bir öğrenci ekleyebilirsiniz." +
                 "Listedeki bir öğrenciye tıklayıp 'Öğrenci Detay' butonuna tıklarsanız o öğrenciye ait bilgileri görebilirsiniz." +
                 "'Öğrenci Sınav Ekleme' butonu ile öğrenciye ait sınav ekleyebilirsiniz." +
                 "Açılan sayfada 'Dosyadan Seç' butonu ile seçtiğiniz bir dosyadan istediğiniz sayıda öğrenciye ait bilgisi ekleyebilirsiniz.";
         JLabel studentPageIntro = new JLabel("<html>" + studentText + "<html>");
         studentPageIntro.setBounds(20, 250, 500, 100);
 
+        String examText = "Sınavlar butonunda sınavlara ait bilgiler listelenir." +
+                "'Sınav ekle' butonu ile yeni sınav ekleyebilirsiniz." +
+                "Listedeki bir sınava tıklayıp 'Sınav Detay' butonuna tıklarsınız sınava dair detaylı bilgileri görebilirsiniz.";
+        JLabel examPageIntro = new JLabel("<html>" + examText + "<html>");
+        examPageIntro.setBounds(20, 360, 500, 100);
+
+        String reportText = "Rapor oluştur butonu ile yeni bir pencere açılır ve bu penceredeki 'Gönder' butonu ile her öğrenci için ayrı dosyalar oluşturulup ilgili öğrenciye ait bilgiler bu dosyalara yazılır.";
+        JLabel reportPageIntro = new JLabel("<html>" + reportText + "<html>");
+        reportPageIntro.setBounds(20, 470, 500, 100);
+
         panel.add(studentButton);
         panel.add(examButton);
         panel.add(studentReports);
         panel.add(welcomeText);
         panel.add(studentPageIntro);
+        panel.add(examPageIntro);
+        panel.add(reportPageIntro);
 
         homeFrame.setVisible(true);
     }
