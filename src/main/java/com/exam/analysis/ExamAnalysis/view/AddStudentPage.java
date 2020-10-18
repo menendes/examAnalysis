@@ -15,8 +15,11 @@ public class AddStudentPage {
     @Autowired
     StudentUIController studentUIController;
 
-    public AddStudentPage() {
+    private JFrame studentFrame;
+
+    public AddStudentPage(JFrame studentFrame) {
         BeanProvider.autowire(this);
+        this.studentFrame = studentFrame;
         init();
     }
 
@@ -68,6 +71,8 @@ public class AddStudentPage {
                 newStudent.setGender(Gender.female);
             }
             studentUIController.addStudent(newStudent);
+            studentFrame.setVisible(false);
+            StudentPage studentPage = new StudentPage();
             formFrame.setVisible(false);
         });
 

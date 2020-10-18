@@ -54,7 +54,7 @@ public class StudentPage {
         JButton addStudentButton = new JButton("Öğrenci Ekle");
         addStudentButton.setBounds(10, 580, 200, 40);
         addStudentButton.addActionListener(e -> {
-            AddStudentPage addStudentPage = new AddStudentPage();
+            AddStudentPage addStudentPage = new AddStudentPage(studentFrame);
         });
 
         //trigger student detail screen

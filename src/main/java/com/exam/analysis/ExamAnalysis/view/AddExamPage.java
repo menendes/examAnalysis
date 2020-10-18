@@ -19,8 +19,11 @@ public class AddExamPage {
     @Autowired
     ExamUIController examUIController;
 
-    public AddExamPage() {
+    private JFrame examFrame;
+
+    public AddExamPage(JFrame examFrame) {
         BeanProvider.autowire(this);
+        this.examFrame = examFrame;
         init();
     }
 
@@ -90,6 +93,8 @@ public class AddExamPage {
             exam.setExamClassrooms(classroomList);
 
             examUIController.addExam(exam);
+            examFrame.setVisible(false);
+            ExamPage examPage = new ExamPage();
             formFrame.setVisible(false);
         });
 

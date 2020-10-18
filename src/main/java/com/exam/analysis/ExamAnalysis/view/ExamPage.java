@@ -53,7 +53,7 @@ public class ExamPage {
         JButton addExamButton = new JButton("Sınav Ekle");
         addExamButton.setBounds(10, 580, 200, 40);
         addExamButton.addActionListener(e -> {
-            AddExamPage addExamPage = new AddExamPage();
+            AddExamPage addExamPage = new AddExamPage(examFrame);
         });
 
         JButton examDetailButton = new JButton("Sınav Detayı");

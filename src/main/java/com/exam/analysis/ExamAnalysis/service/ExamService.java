@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class ExamService implements ExamImpl {
 
         List<ExamListDTO> allExams = new ArrayList<>();
         Pageable limit = PageRequest.of(0,numberOfExamPerPage);
-        List<Exam> exams = examRepository.findAll();
+        Page<Exam> exams = examRepository.findAll(limit);
 
         exams.forEach(exam -> {
                 ExamListDTO examListDTO = modelMapper.map(exam,ExamListDTO.class);
