@@ -3,20 +3,28 @@ package com.exam.analysis.ExamAnalysis.view;
 import com.exam.analysis.ExamAnalysis.UIController.StudentUIController;
 import com.exam.analysis.ExamAnalysis.util.BeanProvider;
 import com.exam.analysis.ExamAnalysis.util.ThreadProvider;
+import org.ini4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+@PropertySource("classpath:config.ini")
 public class StudentReportPage {
 
     @Autowired
     StudentUIController studentUIController;
 
+    private Wini ini;
+
     public StudentReportPage(){
         BeanProvider.autowire(this);
         init();
+
     }
 
     private void init(){
@@ -51,7 +59,13 @@ public class StudentReportPage {
         JButton createReport = new JButton("Raporları Oluştur");
         createReport.setBounds(300, 500, 200, 30);
         createReport.addActionListener(e -> {
-            StringBuilder filePath = new StringBuilder("C:\\Users\\halil.koyuncu\\Desktop\\rapor");
+            try{
+                ini = new Wini(new File("C:\\Users\\halil.koyuncu\\Desktop\\ExamAnalysis\\ExamAnalysis\\src\\main\\resources\\config.ini"));
+            }catch (IOException ex){
+                ex.printStackTrace();
+            }
+
+            String filePath = ini.get("Path","reportPath");;
             List<Map<String,Object>> students = studentUIController.getStudentsForReports();
             int length = students.size();
 
@@ -63,24 +77,25 @@ public class StudentReportPage {
 
             for(int i = 0; i < length; i = i+5){
                 try{
+
                     provider_1.setData(students.get(i));
-                    provider_1.setFileName(filePath.append(i).append(".txt").toString());
+                    provider_1.setFileRootPath(filePath);
                     provider_1.start();
 
                     provider_2.setData(students.get(i+1));
-                    provider_2.setFileName(filePath.append(i+1).append(".txt").toString());
+                    provider_2.setFileRootPath(filePath);
                     provider_2.start();
 
                     provider_3.setData(students.get(i+2));
-                    provider_3.setFileName(filePath.append(i+2).append(".txt").toString());
+                    provider_3.setFileRootPath(filePath);
                     provider_3.start();
 
                     provider_4.setData(students.get(i+3));
-                    provider_4.setFileName(filePath.append(i+3).append(".txt").toString());
+                    provider_4.setFileRootPath(filePath);
                     provider_4.start();
 
                     provider_5.setData(students.get(i+4));
-                    provider_5.setFileName(filePath.append(i+4).append(".txt").toString());
+                    provider_5.setFileRootPath(filePath);
                     provider_5.start();
 
                 }catch (IndexOutOfBoundsException ex){

@@ -2,7 +2,6 @@ package com.exam.analysis.ExamAnalysis.service;
 
 import com.exam.analysis.ExamAnalysis.dto.ExamDTO;
 import com.exam.analysis.ExamAnalysis.dto.StudentDTO;
-import com.exam.analysis.ExamAnalysis.model.Exam;
 import com.exam.analysis.ExamAnalysis.model.Student;
 import com.exam.analysis.ExamAnalysis.model.StudentExam;
 import com.exam.analysis.ExamAnalysis.repository.StudentExamRepository;
@@ -10,7 +9,6 @@ import com.exam.analysis.ExamAnalysis.repository.StudentRepository;
 import com.exam.analysis.ExamAnalysis.serviceImpl.StudentImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
